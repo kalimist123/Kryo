@@ -1,6 +1,6 @@
 
 
-/*
+
 package com.diaceutics.kryo
 
 import org.clulab.processors.corenlp.CoreNLPProcessor
@@ -36,4 +36,3 @@ object ProcessorExample {
 
   }
 }
-*/
