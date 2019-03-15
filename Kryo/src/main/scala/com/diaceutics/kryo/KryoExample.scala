@@ -1,8 +1,6 @@
 
 package com.diaceutics.kryo
 
-import org.apache.spark.{SparkConf, SparkContext}
-
 
 import java.io.ByteArrayOutputStream
 
@@ -14,11 +12,6 @@ import org.apache.spark.serializer.KryoSerializer
 import org.apache.spark.{SparkConf, SparkContext}
 
 import scala.reflect.ClassTag
-
-
-/**
-  * Example code showing how to kryo serialization for disk
-  */
 
 object KryoExample {
 

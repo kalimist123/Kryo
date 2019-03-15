@@ -2,13 +2,9 @@
 
 
 package com.diaceutics.kryo
-
-import org.clulab.processors.corenlp.CoreNLPProcessor
 import org.clulab.processors.fastnlp.FastNLPProcessor
-import org.clulab.processors.shallownlp.ShallowNLPProcessor
 import org.clulab.serialization.DocumentSerializer
 import org.clulab.processors.{Document, Processor}
-import org.clulab.struct.DirectedGraphEdgeIterator
 
 object ProcessorExample {
   def main(args:Array[String]) {
