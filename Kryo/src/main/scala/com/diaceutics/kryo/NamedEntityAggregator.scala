@@ -1,8 +1,10 @@
 package com.diaceutics.kryo
 
+import org.apache.spark.rdd.RDD
+import org.clulab.processors.fastnlp.FastNLPProcessor
 import org.clulab.processors.{Processor, Sentence}
 
-class NamedEntityAggregator {
+class NamedEntityAggregator extends Serializable {
 
   def extractEntities(processor: Processor, corpus: String) = {
     val doc = processor.annotate(corpus)
@@ -38,5 +40,19 @@ class NamedEntityAggregator {
     aggregate(entities)
   }
 
+  def extract(corpusRdd: RDD[String]):
+  RDD[Entities] = {
+    corpusRdd mapPartitions {
+      case it=>
+        val processor = new
+            FastNLPProcessor()
+        it map {
+          corpus =>
+            val entities =
+              extractEntities(processor, corpus)
+            new Entities(entities)
+        }
+    }
+  }
 
 }

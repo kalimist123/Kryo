@@ -19,14 +19,15 @@ object ExtractEntitiesFromCsv {
     val proc: Processor = new FastNLPProcessor()
     val aggEnt = new NamedEntityAggregator();
 
+
     val empDF = spark.read.format("csv")
       .option("header", "true")
       .option("inferSchema", "true")
       .load("Kryo\\src\\resources\\1col.csv")
 
-    import spark.implicits._
-    val newDf = empDF.withColumn("annotated", lineAgg($"textstrings"))
-    newDf.show(1000, false)
+        import spark.implicits._
+        val newDf = empDF.withColumn("annotated", lineAgg($"textstrings"))
+        newDf.show(1000, false)
 
   }
 
