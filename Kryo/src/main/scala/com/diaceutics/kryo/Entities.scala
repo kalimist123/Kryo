@@ -1,6 +1,7 @@
 package com.diaceutics.kryo
 
 case class Entity(eType: String, eVal: String)
+
 case class Entities(sentences: Array[List[Entity]]) {
 
   def getSentences = sentences

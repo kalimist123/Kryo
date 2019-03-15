@@ -14,12 +14,12 @@ class NamedEntityAggregator {
       .filter(_.eType != "O")
   }
 
-  private def aggregateEntities(current: Entity, entities: Array[Entity], processed : List[Entity] = List[Entity]()): List[Entity] = {
-    if(entities.isEmpty) {
+  private def aggregateEntities(current: Entity, entities: Array[Entity], processed: List[Entity] = List[Entity]()): List[Entity] = {
+    if (entities.isEmpty) {
       current :: processed
     } else {
       val entity = entities.head
-      if(entity.eType == current.eType) {
+      if (entity.eType == current.eType) {
         val agg = Entity(current.eType, current.eVal + " " + entity.eVal)
         aggregateEntities(agg, entities.tail, processed)
       } else {

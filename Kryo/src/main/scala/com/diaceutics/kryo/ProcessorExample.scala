@@ -11,7 +11,7 @@ object ProcessorExample {
     // create the processor
     val proc:Processor = new FastNLPProcessor()
 
-    val doc = proc.annotate("Michael Lennon went to China and New York. He visited Beijing to see Tony Santiago, on January 10th, 2013.")
+    val doc = proc.annotate("Michael Munro went to China and New York. He visited Beijing to see Tony Santiago, on January 10th, 2013.")
     printDoc(doc)
     // serialize the doc using our custom serializer
     val ser = new DocumentSerializer
