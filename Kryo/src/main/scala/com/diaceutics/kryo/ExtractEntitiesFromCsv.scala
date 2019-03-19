@@ -4,7 +4,7 @@ import org.clulab.processors.fastnlp.FastNLPProcessor
 import org.clulab.processors.{Document, Processor, Sentence}
 import org.apache.spark.sql.{SQLContext, SparkSession}
 import org.apache.spark.sql.functions.udf
-
+import java.io.File
 object ExtractEntitiesFromCsv {
 
   val proc: Processor = new FastNLPProcessor()
@@ -16,19 +16,19 @@ object ExtractEntitiesFromCsv {
       .config("spark.master", "local")
       .getOrCreate()
 
-    val proc: Processor = new FastNLPProcessor()
-    val aggEnt = new NamedEntityAggregator();
 
+    import spark.implicits._
+    val path ="Kryo\\src\\resources\\"
+    val files =getListOfFiles(path)
+    files foreach (file=>{ (file.getPath)
 
     val empDF = spark.read.format("csv")
       .option("header", "true")
       .option("inferSchema", "true")
-      .load("Kryo\\src\\resources\\1col.csv")
-
-        import spark.implicits._
+      .load(file.getPath)
         val newDf = empDF.withColumn("annotated", lineAgg($"textstrings"))
         newDf.show(1000, false)
-
+    })
   }
 
 
@@ -43,5 +43,12 @@ object ExtractEntitiesFromCsv {
     sb.toString()
   })
 
-
+  def getListOfFiles(dir: String):List[File] = {
+    val d = new File(dir)
+    if (d.exists && d.isDirectory) {
+      d.listFiles.filter(_.isFile).toList
+    } else {
+      List[File]()
+    }
+  }
 }
